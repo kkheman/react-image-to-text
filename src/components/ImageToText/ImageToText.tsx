@@ -30,14 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 10,
     },
     content: {
-      display: "block",
-      cursor: "pointer",
-      textAlign: "center",
-      border: "1px dashed #ccc",
       marginTop: 10,
-      marginBottom: 10,
-      marginLeft: 25,
-      width: 230,
     },
     cardItems: {
       marginBottom: 10,
@@ -46,9 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
     },
-    fileInput: {
-      display: "none",
-    }
   })
 );
 
@@ -120,19 +110,21 @@ export function ImageToText(props: any) {
             Convert Image to Text
           </Typography>
           <Divider />
-          <label htmlFor="file-upload" className={classes.content}>
-            <IconButton size="small" color="primary">
-              <ImageIcon />
-            </IconButton>
-            Upload image
-          </label>
-          <input
-            className={classes.fileInput}
-            type="file"
-            onChange={handleInputChange}
-            accept="image/*"
-          />
-          <Typography paragraph align="center">{fileName}</Typography>
+          <Typography align="center">
+          <Button className={classes.content}
+            variant="contained"
+            color="primary"
+            component="label"
+            size="small"
+            startIcon={<ImageIcon />}
+          >
+            Upload File
+            <input type="file" hidden onChange={handleInputChange} />
+          </Button>
+          </Typography>
+          <Typography paragraph align="center">
+            {fileName}
+          </Typography>
           <Typography align="center">
             <Button
               className={classes.cardItems}
@@ -146,20 +138,22 @@ export function ImageToText(props: any) {
           </Typography>
           {loading && <LinearProgress className={classes.cardItems} />}
         </CardContent>
-       { resultText.length > 0 && <CardActions className={classes.actions} disableSpacing>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => {
-              navigator.clipboard.writeText(resultText);
-            }}
-          >
-            Copy to clipboard
-          </Button>
-          <Button size="small" color="primary" onClick={handleExportTxt}>
-            Download
-          </Button>
-        </CardActions> }
+        {resultText.length > 0 && (
+          <CardActions className={classes.actions} disableSpacing>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                navigator.clipboard.writeText(resultText);
+              }}
+            >
+              Copy to clipboard
+            </Button>
+            <Button size="small" color="primary" onClick={handleExportTxt}>
+              Download
+            </Button>
+          </CardActions>
+        )}
       </Card>
       <Snackbar
         anchorOrigin={{

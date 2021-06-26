@@ -5,7 +5,7 @@ Component allows user either to copy the converted text to clipboard or download
 
 ## Installation
 
-    npm i text-to-image
+    npm i react-image-to-text
 
 ## Usage 
 
